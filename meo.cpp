@@ -104,7 +104,7 @@ int main(int argc, char* args[]) {
     SDL_Renderer* renderer = NULL;
     SDL_Texture* texture = NULL;
 
-    srand(time(0)); 
+    srand(time(0));
 
     unsigned int enemySpot = rand() % 6 + 1;
 
@@ -126,7 +126,6 @@ int main(int argc, char* args[]) {
     SDL_Texture* rockTexture4 = loadTexture("rock4.png", renderer);
     SDL_Texture* rockTexture5 = loadTexture("rock5.png", renderer);
     SDL_Texture* rockTexture6 = loadTexture("rock6.png", renderer);
-
     SDL_Texture* enemyTexture = loadTexture("enemy.png", renderer);
 
     SDL_Texture* finalTexture1 = rockTexture1;
@@ -149,19 +148,19 @@ int main(int argc, char* args[]) {
     int winningWidth = 0, winningHeight = 0;
     int losingWidth = 0, losingHeight = 0;
     SDL_Texture* winningTexture = loadTexture("win.png", renderer);
-    SDL_Texture* losingTexture = loadTexture("lose.png",renderer);
+    SDL_Texture* losingTexture = loadTexture("lose.png", renderer);
     if (winningTexture == NULL or losingTexture == NULL) {
         std::cerr << "Failed to load texture image!" << std::endl;
         return -1;
     }
     bool r1 = true;
     bool r2 = true;
-    bool r3 = true; 
+    bool r3 = true;
     bool r4 = true;
     bool r5 = true;
     bool r6 = true;
     bool quit = false;
-    SDL_Event e; 
+    SDL_Event e;
     int bomb = 3;
     bool flag = false;
     while (!quit) {
@@ -172,66 +171,66 @@ int main(int argc, char* args[]) {
 
             else if (e.type == SDL_KEYDOWN) {
                 switch (e.key.keysym.sym) {
-                    case SDLK_1: 
-                        if (enemySpot == 1) {
-                            finalTexture1 = enemyTexture;
-                            flag = true;
-                        }
-                        else {
-                            r1 = false;
-                            bomb--;
-                        }
-                        break;
-                    case SDLK_2:
-                        if (enemySpot == 2) {
-                            finalTexture2 = enemyTexture;
-                            flag = true;
-                        }
-                        else {
-                            r2 = false;
-                            bomb--;
-                        }
-                        break;
-                    case SDLK_3:
-                        if (enemySpot == 3) {
-                            finalTexture3 = enemyTexture;
-                            flag = true;
-                        }
-                        else {
-                            r3 = false;
-                            bomb--;
-                        }
-                        break;
-                    case SDLK_4:
-                        if (enemySpot == 4) {
-                            finalTexture4 = enemyTexture;
-                            flag = true;
-                        }
-                        else {
-                            r4 = false;
-                            bomb--;
-                        }
-                        break;
-                    case SDLK_5:
-                        if (enemySpot == 5) {
-                            finalTexture5 = enemyTexture;
-                            flag = true;
-                        }
-                        else {
-                            r5 = false;
-                            bomb--;
-                        }
-                        break;
-                    case SDLK_6:
-                        if (enemySpot == 6) {
-                            finalTexture6 = enemyTexture;
-                            flag = true;
-                        }
-                        else {
-                            r6 = false;
-                            bomb--;
-                        }
-                        break;
+                case SDLK_1:
+                    if (enemySpot == 1) {
+                        finalTexture1 = enemyTexture;
+                        flag = true;
+                    }
+                    else {
+                        r1 = false;
+                        bomb--;
+                    }
+                    break;
+                case SDLK_2:
+                    if (enemySpot == 2) {
+                        finalTexture2 = enemyTexture;
+                        flag = true;
+                    }
+                    else {
+                        r2 = false;
+                        bomb--;
+                    }
+                    break;
+                case SDLK_3:
+                    if (enemySpot == 3) {
+                        finalTexture3 = enemyTexture;
+                        flag = true;
+                    }
+                    else {
+                        r3 = false;
+                        bomb--;
+                    }
+                    break;
+                case SDLK_4:
+                    if (enemySpot == 4) {
+                        finalTexture4 = enemyTexture;
+                        flag = true;
+                    }
+                    else {
+                        r4 = false;
+                        bomb--;
+                    }
+                    break;
+                case SDLK_5:
+                    if (enemySpot == 5) {
+                        finalTexture5 = enemyTexture;
+                        flag = true;
+                    }
+                    else {
+                        r5 = false;
+                        bomb--;
+                    }
+                    break;
+                case SDLK_6:
+                    if (enemySpot == 6) {
+                        finalTexture6 = enemyTexture;
+                        flag = true;
+                    }
+                    else {
+                        r6 = false;
+                        bomb--;
+                    }
+                    break;
                 }
             }
         }
@@ -247,10 +246,15 @@ int main(int argc, char* args[]) {
         SDL_RenderPresent(renderer);
         if (bomb == 0) {
             SDL_RenderCopy(renderer, losingTexture, NULL, NULL);
+            SDL_RenderPresent(renderer);
+            SDL_Delay(1000);
             break;
         }
         else if (flag == true) {
+            SDL_RenderPresent(renderer); 
+            SDL_Delay(1000);
             SDL_RenderCopy(renderer, winningTexture, NULL, NULL);
+            SDL_RenderPresent(renderer);
             break;
         }
     }
